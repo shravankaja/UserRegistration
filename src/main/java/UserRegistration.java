@@ -39,6 +39,13 @@ public class UserRegistration {
         validCheck(value);
 
     }
+    public static void isValidPassword(String password) {
+
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9]{8,}");
+        Matcher matcher = pattern.matcher(password);
+        value = matcher.find();
+        validCheck(value);
+    }
 
     public static void validCheck(boolean value) {
         if (value) {
@@ -62,5 +69,8 @@ public class UserRegistration {
         System.out.println("Enter phone \n");
         String phone = sc.next();
         isValidPhone(phone);
+        System.out.println("Enter password \n");
+        String password = sc.next();
+        isValidPassword(password);
     }
 }
