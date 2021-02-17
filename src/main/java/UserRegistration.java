@@ -20,6 +20,7 @@ public class UserRegistration {
         value = matcher.find();
         validCheck(value);
     }
+
     public static void isValidEmail(String email) {
 
         Pattern pattern = Pattern.compile(
@@ -28,6 +29,17 @@ public class UserRegistration {
         value = matcher.find();
         validCheck(value);
     }
+
+    public static void isValidPhone(String phone) {
+
+        String regexPhone = "^[9][1][0-9]{10}$";
+        Pattern pattern = Pattern.compile(regexPhone);
+        Matcher matcher = pattern.matcher(phone);
+        value = matcher.matches();
+        validCheck(value);
+
+    }
+
     public static void validCheck(boolean value) {
         if (value) {
             System.out.println("Valid");
@@ -43,9 +55,12 @@ public class UserRegistration {
         isValidFirstName(firstName);
         System.out.println("Enter last name \n");
         String lastName = sc.next();
-        isValidLastName(lastName);
+        isValidFirstName(lastName);
         System.out.println("Enter Email \n");
         String email = sc.next();
         isValidEmail(email);
+        System.out.println("Enter phone \n");
+        String phone = sc.next();
+        isValidPhone(phone);
     }
 }
