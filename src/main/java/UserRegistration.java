@@ -20,7 +20,14 @@ public class UserRegistration {
         value = matcher.find();
         validCheck(value);
     }
+    public static void isValidEmail(String email) {
 
+        Pattern pattern = Pattern.compile(
+                "^[a-zA-z0-9]{1,}([\\.\\_\\+\\-])?[a-zA-Z0-9]{0,}@[a-zA-z0-9]{1,}\\.[a-z]{2,3}(\\.)?([a-z]{2,3})?");
+        Matcher matcher = pattern.matcher(email);
+        value = matcher.find();
+        validCheck(value);
+    }
     public static void validCheck(boolean value) {
         if (value) {
             System.out.println("Valid");
@@ -36,6 +43,9 @@ public class UserRegistration {
         isValidFirstName(firstName);
         System.out.println("Enter last name \n");
         String lastName = sc.next();
-        isValidFirstName(lastName);
+        isValidLastName(lastName);
+        System.out.println("Enter Email \n");
+        String email = sc.next();
+        isValidEmail(email);
     }
 }
