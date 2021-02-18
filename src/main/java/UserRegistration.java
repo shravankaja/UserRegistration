@@ -41,7 +41,7 @@ public class UserRegistration {
     }
     public static void isValidPassword(String password) {
 
-        Pattern pattern = Pattern.compile("^(?=.*?[A-Z])(?=.*?[0-9])[a-zA-Z0-9]{8,}$");
+        Pattern pattern = Pattern.compile("^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*])(?!.*[!@#$%^&*].*[!@#$%^&*]).*$");
         Matcher matcher = pattern.matcher(password);
         value = matcher.find();
         validCheck(value);
