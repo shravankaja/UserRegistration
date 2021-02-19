@@ -27,16 +27,17 @@ public class UserRegistrationTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"shravK24$sasa", "Ksddq23%dasd"})
+    public void passwordTest(String password) throws Exception {
+        UserRegistration userRegistration = new UserRegistration();
+        Assertions.assertEquals("Valid", userRegistration.isValidPassword(password));
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {"919740216522", "919999999999"})
     public void phoneTest(String phone) throws Exception {
         UserRegistration userRegistration = new UserRegistration();
         Assertions.assertEquals("Valid", userRegistration.isValidPhone(phone));
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"shravK24$sasa", "Ksddq23%dasd"})
-    public void passwordTest(String password) throws Exception {
-        UserRegistration userRegistration = new UserRegistration();
-        Assertions.assertEquals("Valid", userRegistration.isValidPassword(password));
-    }
 }
