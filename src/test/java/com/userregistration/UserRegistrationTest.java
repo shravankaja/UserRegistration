@@ -6,17 +6,17 @@ import org.junit.jupiter.params.provider.*;
 
 public class UserRegistrationTest {
     @ParameterizedTest
-    @ValueSource(strings = {"Shrvaan.kaja@gmiil.com", "abc.xyz@gmail.com"})
-    public void emailTest(String email) throws Exception {
-        UserRegistration userRegistration = new UserRegistration();
-        Assertions.assertEquals("Valid", userRegistration.isValidEmail(email));
-    }
-
-    @ParameterizedTest
     @ValueSource(strings = {"Shrvaankaja", "DghDui"})
     public void firstNameTest(String name) throws Exception {
         UserRegistration userRegistration = new UserRegistration();
         Assertions.assertEquals("Valid", userRegistration.isValidFirstName(name));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Shrvaan.kaja@gmiil.com", "abc.xyz@gmail.com"})
+    public void emailTest(String email) throws Exception {
+        UserRegistration userRegistration = new UserRegistration();
+        Assertions.assertEquals("Valid", userRegistration.isValidEmail(email));
     }
 
     @ParameterizedTest
@@ -37,6 +37,6 @@ public class UserRegistrationTest {
     @ValueSource(strings = {"shravK24$sasa", "Ksddq23%dasd"})
     public void passwordTest(String password) throws Exception {
         UserRegistration userRegistration = new UserRegistration();
-        Assertions.assertEquals("Valid", userRegistration.isValidP(password));
+        Assertions.assertEquals("Valid", userRegistration.isValidPassword(password));
     }
 }
