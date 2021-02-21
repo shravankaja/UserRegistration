@@ -1,43 +1,74 @@
 package com.userregistration;
 
+import junit.framework.*;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.*;
 import org.junit.jupiter.params.provider.*;
+import org.junit.rules.*;
+import org.opentest4j.AssertionFailedError;
 
 public class UserRegistrationTest {
-    @ParameterizedTest
-    @ValueSource(strings = {"Shrvaankaja", "DghDui"})
-    public void firstNameTest(String name) throws Exception {
-        UserRegistration userRegistration = new UserRegistration();
-        Assertions.assertEquals("Valid", userRegistration.isValidFirstName(name));
+
+    @Test
+    public void firstNameTest() throws UserRegistrationException {
+        try {
+            UserRegistration userRegistration = new UserRegistration();
+            ExpectedException exception = ExpectedException.none();
+            exception.expect(UserRegistrationException.class);
+            Assertions.assertEquals("Valid", userRegistration.isValidFirstName(" "));
+        } catch (AssertionFailedError e) {
+            throw new UserRegistrationException("Please enter valid input");
+        }
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"Shrvaan.kaja@gmiil.com", "abc.xyz@gmail.com"})
-    public void emailTest(String email) throws Exception {
-        UserRegistration userRegistration = new UserRegistration();
-        Assertions.assertEquals("Valid", userRegistration.isValidEmail(email));
+    @ValueSource(strings = {"Shrvaan.kaja@gmiil.com", "abc.xyz@gmail.com", "ab@gmail.com"})
+    public void emailTest(String email) throws UserRegistrationException {
+        try {
+            UserRegistration userRegistration = new UserRegistration();
+            ExpectedException exception = ExpectedException.none();
+            exception.expect(UserRegistrationException.class);
+            Assertions.assertEquals("Valid", userRegistration.isValidEmail(email));
+        } catch (AssertionFailedError e) {
+            throw new UserRegistrationException("Please enter valid input");
+        }
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"Shrvaankaja", "DghDui"})
-    public void lastNameTest(String name) throws Exception {
-        UserRegistration userRegistration = new UserRegistration();
-        Assertions.assertEquals("Valid", userRegistration.isValidLastName(name));
+    @Test
+    public void lastNameTest() throws UserRegistrationException {
+        try {
+            UserRegistration userRegistration = new UserRegistration();
+            ExpectedException exception = ExpectedException.none();
+            exception.expect(UserRegistrationException.class);
+            Assertions.assertEquals("Valid", userRegistration.isValidLastName("Kaja"));
+        } catch (AssertionFailedError e) {
+            throw new UserRegistrationException("Please enter valid input");
+        }
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"shravK24$sasa", "Ksddq23%dasd"})
-    public void passwordTest(String password) throws Exception {
-        UserRegistration userRegistration = new UserRegistration();
-        Assertions.assertEquals("Valid", userRegistration.isValidPassword(password));
+    @Test
+    public void passwordTest() throws UserRegistrationException {
+        try {
+            UserRegistration userRegistration = new UserRegistration();
+            ExpectedException exception = ExpectedException.none();
+            exception.expect(UserRegistrationException.class);
+            Assertions.assertEquals("Valid", userRegistration.isValidPassword("Shravank25$"));
+        } catch (AssertionFailedError e) {
+            throw new UserRegistrationException("Please enter valid input");
+        }
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"919740216522", "919999999999"})
-    public void phoneTest(String phone) throws Exception {
-        UserRegistration userRegistration = new UserRegistration();
-        Assertions.assertEquals("Valid", userRegistration.isValidPhone(phone));
+    @Test
+    public void phoneTest() throws UserRegistrationException {
+        try {
+            UserRegistration userRegistration = new UserRegistration();
+            ExpectedException exception = ExpectedException.none();
+            exception.expect(UserRegistrationException.class);
+            Assertions.assertEquals("Valid", userRegistration.isValidPhone("919740216522"));
+        } catch (AssertionFailedError e) {
+            throw new UserRegistrationException("Please enter valid input");
+        }
     }
 
 }
