@@ -6,47 +6,44 @@ import java.util.regex.Pattern;
 
 public class UserRegistration {
     public boolean value;
+    public boolean valueMain;
+    public final String FIRSTNAMEPATTERN = "^[A-Z][a-zA-Z]{2,}$";
+    public final String LASTNAMEPATTERN = "^[A-Z][a-zA-Z]{2,}$";
+    public final String EMAILPATTERN = "^[a-zA-z0-9]{1,}([\\.\\_\\+\\-])?[a-zA-Z0-9]{0,}@[a-zA-z0-9]{1,}\\.[a-z]{2,3}(\\.)?([a-z]{2,3})?";
+    public final String PHONEPATTERN = "^[9][1][0-9]{10}$";
+    public final String PASSWORDPATTERN = "^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*])(?!.*[!@#$%^&*].*[!@#$%^&*]).*$";
+
+    public boolean validatorMethod(String inputField, String patternMain) {
+        Pattern pattern = Pattern.compile(patternMain);
+        Matcher matcher = pattern.matcher(inputField);
+        valueMain = matcher.find();
+        return valueMain;
+    }
 
     public String isValidFirstName(String firstName) {
-        Pattern pattern = Pattern.compile("^[A-Z][a-zA-Z]{2,}$");
-        Matcher matcher = pattern.matcher(firstName);
-        value = matcher.find();
+        value = validatorMethod(firstName, FIRSTNAMEPATTERN);
         return validCheck(value);
     }
 
     public String isValidLastName(String lastName) {
-        Pattern pattern = Pattern.compile("^[A-Z][a-zA-Z]{2,}$");
-        Matcher matcher = pattern.matcher(lastName);
-        value = matcher.find();
+        value = validatorMethod(lastName, LASTNAMEPATTERN);
         return validCheck(value);
     }
-
 
     public String isValidEmail(String email) {
-        Pattern pattern = Pattern.compile(
-                "^[a-zA-z0-9]{1,}([\\.\\_\\+\\-])?[a-zA-Z0-9]{0,}@[a-zA-z0-9]{1,}\\.[a-z]{2,3}(\\.)?([a-z]{2,3})?");
-        Matcher matcher = pattern.matcher(email);
-        value = matcher.find();
+        value = validatorMethod(email, EMAILPATTERN);
         return validCheck(value);
     }
-
 
     public String isValidPhone(String phone) {
-        String regexPhone = "^[9][1][0-9]{10}$";
-        Pattern pattern = Pattern.compile(regexPhone);
-        Matcher matcher = pattern.matcher(phone);
-        value = matcher.matches();
+        value = validatorMethod(phone, PHONEPATTERN);
         return validCheck(value);
     }
-
 
     public String isValidPassword(String password) {
-        Pattern pattern = Pattern.compile("^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*])(?!.*[!@#$%^&*].*[!@#$%^&*]).*$");
-        Matcher matcher = pattern.matcher(password);
-        value = matcher.find();
+        value = validatorMethod(password, PASSWORDPATTERN);
         return validCheck(value);
     }
-
 
     public String validCheck(boolean value) {
         if (value) {
