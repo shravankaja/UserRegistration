@@ -4,74 +4,43 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@FunctionalInterface
+interface validateUserEntry {
+    boolean validate(String userInput, String pattern);
+}
+
 public class UserRegistration {
     public boolean value;
-    public boolean valueMain;
-    public final String FIRSTNAMEPATTERN = "^[A-Z][a-zA-Z]{2,}$";
-    public final String LASTNAMEPATTERN = "^[A-Z][a-zA-Z]{2,}$";
-    public final String EMAILPATTERN = "^[a-zA-z0-9]{1,}([\\.\\_\\+\\-])?[a-zA-Z0-9]{0,}@[a-zA-z0-9]{1,}\\.[a-z]{2,3}(\\.)?([a-z]{2,3})?";
-    public final String PHONEPATTERN = "^[9][1][0-9]{10}$";
-    public final String PASSWORDPATTERN = "^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*])(?!.*[!@#$%^&*].*[!@#$%^&*]).*$";
-
-    public boolean validatorMethod(String inputField, String patternMain) {
-        Pattern pattern = Pattern.compile(patternMain);
-        Matcher matcher = pattern.matcher(inputField);
-        valueMain = matcher.find();
-        return valueMain;
-    }
-
-    public String isValidFirstName(String firstName) {
-        value = validatorMethod(firstName, FIRSTNAMEPATTERN);
-        return validCheck(value);
-    }
-
-    public String isValidLastName(String lastName) {
-        value = validatorMethod(lastName, LASTNAMEPATTERN);
-        return validCheck(value);
-    }
-
-    public String isValidEmail(String email) {
-        value = validatorMethod(email, EMAILPATTERN);
-        return validCheck(value);
-    }
-
-    public String isValidPhone(String phone) {
-        value = validatorMethod(phone, PHONEPATTERN);
-        return validCheck(value);
-    }
-
-    public String isValidPassword(String password) {
-        value = validatorMethod(password, PASSWORDPATTERN);
-        return validCheck(value);
-    }
-
-    public String validCheck(boolean value) {
-        if (value) {
-            System.out.println("Valid");
-            return "Valid";
-        } else {
-            System.out.println("Invalid");
-            return "Invalid";
-        }
-    }
+    public static boolean resultValue;
+    public static final String FIRSTNAMEPATTERN = "^[A-Z][a-zA-Z]{2,}$";
+    public static final String LASTNAMEPATTERN = "^[A-Z][a-zA-Z]{2,}$";
+    public static final String EMAILPATTERN = "^[a-zA-z0-9]{1,}([\\.\\_\\+\\-])?[a-zA-Z0-9]{0,}@[a-zA-z0-9]{1,}\\.[a-z]{2,3}(\\.)?([a-z]{2,3})?";
+    public static final String PHONEPATTERN = "^[9][1][0-9]{10}$";
+    public static final String PASSWORDPATTERN = "^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*])(?!.*[!@#$%^&*].*[!@#$%^&*]).*$";
+    static String userInput;
 
     public static void main(String Args[]) {
         Scanner sc = new Scanner(System.in);
-        UserRegistration userRegistration = new UserRegistration();
-        System.out.println("Enter first name \n");
-        String firstName = sc.next();
-        userRegistration.isValidFirstName(firstName);
-        System.out.println("Enter last name \n");
-        String lastName = sc.next();
-        userRegistration.isValidFirstName(lastName);
-        System.out.println("Enter Email \n");
-        String email = sc.next();
-        userRegistration.isValidEmail(email);
-        System.out.println("Enter phone \n");
-        String phone = sc.next();
-        userRegistration.isValidPhone(phone);
-        System.out.println("Enter password \n");
-        String password = sc.next();
-        userRegistration.isValidPassword(password);
+        validateUserEntry validator = (String userInput, String pattern) -> {
+            Pattern pattern1 = Pattern.compile(pattern);
+            Matcher matcher = pattern1.matcher(userInput);
+            resultValue = matcher.find();
+            return resultValue;
+        };
+        System.out.println("Enter first name : ");
+        String enteredFirstName = sc.next();
+        System.out.println("Resullt is " + validator.validate(enteredFirstName, FIRSTNAMEPATTERN));
+        System.out.println("Enter last name : ");
+        String enteredLastName = sc.next();
+        System.out.println("Resullt is " + validator.validate(enteredLastName, LASTNAMEPATTERN));
+        System.out.println("Enter email  : ");
+        String enteredEmail = sc.next();
+        System.out.println("Resullt is " + validator.validate(enteredEmail, EMAILPATTERN));
+        System.out.println("Enter Phone : ");
+        String enteredPhone = sc.next();
+        System.out.println("Resullt is " + validator.validate(enteredPhone, PHONEPATTERN));
+        System.out.println("Enter Password : ");
+        String enteredPassword = sc.next();
+        System.out.println("Resullt is " + validator.validate(enteredPassword, PASSWORDPATTERN));
     }
 }
